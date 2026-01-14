@@ -1,0 +1,146 @@
+.contact-section {
+  padding: 2rem 0;
+}
+
+.section-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--color-text, #1e293b);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.contact-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.contact-grid {
+  grid-template-columns: 1fr;
+  display: grid;
+}
+
+.contact-list {
+  flex-direction: column;
+}
+
+.contact-inline {
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: var(--color-background, #ffffff);
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-surface, #f8fafc);
+  text-decoration: none;
+  color: var(--color-text, #1e293b);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  min-height: 80px;
+}
+
+.contact-link:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  border-color: var(--color-primary, #3b82f6);
+}
+
+.contact-link:active {
+  transform: translateY(-2px);
+}
+
+.contact-icon {
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  background-color: var(--color-surface, #f8fafc);
+  border-radius: 0.5rem;
+  flex-shrink: 0;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.contact-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-primary, #3b82f6);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.contact-url {
+  font-size: 0.875rem;
+  color: var(--color-text, #1e293b);
+  word-break: break-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-link {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.25rem;
+  }
+
+  .contact-url {
+    font-size: 0.75rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .section-title {
+    font-size: 2.25rem;
+    text-align: left;
+  }
+
+  .contact-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .contact-list {
+    max-width: 500px;
+  }
+
+  .contact-inline {
+    gap: 2rem;
+  }
+
+  .contact-link {
+    padding: 2rem;
+  }
+
+  .contact-icon {
+    width: 3.5rem;
+    height: 3.5rem;
+    font-size: 2.5rem;
+  }
+
+  .contact-label {
+    font-size: 1rem;
+  }
+
+  .contact-url {
+    font-size: 1rem;
+  }
+}

@@ -1,0 +1,11 @@
+<svg width="150" height="150" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="avatar-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2563eb;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="150" height="150" fill="url(#avatar-gradient)" rx="75"/>
+  <circle cx="75" cy="60" r="30" fill="white"/>
+  <path d="M 25 130 Q 75 70 125 130" fill="white"/>
+</svg>

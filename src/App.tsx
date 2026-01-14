@@ -1,35 +1,59 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Layout from './components/Layout/Layout';
+import ProfileHeader from './components/ProfileHeader/ProfileHeader';
+import ProjectSection from './components/ProjectSection/ProjectSection';
+import ContactSection from './components/ContactSection/ContactSection';
+import Loading from './components/Loading/Loading';
+import Error from './components/Error/Error';
+import { useDataLoader } from './hooks/useDataLoader';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { data, loading, error, refetch } = useDataLoader();
+
+  if (loading) {
+    return (
+      <Layout>
+        <Loading message="加载个人主页..." />
+      </Layout>
+    );
+  }
+
+  if (error) {
+    return (
+      <Layout>
+        <Error error={error} onRetry={refetch} />
+      </Layout>
+    );
+  }
+
+  if (!data) {
+    const noDataError: Error = {
+      name: 'Error',
+      message: '未能加载数据'
+    };
+    return (
+      <Layout>
+        <Error error={noDataError} onRetry={() => refetch()} />
+      </Layout>
+    );
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Layout>
+      <main className="main-content">
+        <ProfileHeader profile={data.profile} />
+        <ProjectSection 
+          projects={data.projects}
+          title="最近项目"
+          showStatus={true}
+        />
+        <ContactSection 
+          contacts={data.contacts}
+          layout="grid"
+        />
+      </main>
+    </Layout>
+  );
 }
 
-export default App
+export default App;
