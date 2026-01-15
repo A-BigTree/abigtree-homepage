@@ -14,6 +14,7 @@ export const personalData: PersonalData = {
       id: "1",
       title: "个人主页",
       description: "使用 Vite + React + TypeScript 构建的现代化个人主页，展示个人作品和技能。",
+      category: "recent",
       technologies: [
         { name: "React", category: "frontend", proficiency: 5 },
         { name: "TypeScript", category: "language", proficiency: 4 },
@@ -31,6 +32,7 @@ export const personalData: PersonalData = {
       id: "2",
       title: "React 组件库",
       description: "一套可复用的 React UI 组件库，提供常见的基础组件和交互组件。",
+      category: "recent",
       technologies: [
         { name: "React", category: "frontend", proficiency: 5 },
         { name: "TypeScript", category: "language", proficiency: 4 },
@@ -49,6 +51,7 @@ export const personalData: PersonalData = {
       id: "3",
       title: "数据可视化平台",
       description: "基于 Web 的数据可视化分析平台，支持多种图表类型和实时数据更新。",
+      category: "recent",
       technologies: [
         { name: "React", category: "frontend", proficiency: 5 },
         { name: "D3.js", category: "frontend", proficiency: 3 },
@@ -80,12 +83,28 @@ export const personalData: PersonalData = {
       order: 2
     },
     {
+      type: "blog",
+      url: "https://blog.yourwebsite.com",
+      label: "个人博客",
+      icon: "📝",
+      visible: true,
+      order: 3
+    },
+    {
+      type: "csdn",
+      url: "https://blog.csdn.net/yourusername",
+      label: "CSDN",
+      icon: "🔬",
+      visible: true,
+      order: 4
+    },
+    {
       type: "website",
       url: "https://yourwebsite.com",
       label: "个人网站",
       icon: "🌐",
       visible: true,
-      order: 3
+      order: 5
     }
   ],
   skills: [
@@ -101,8 +120,9 @@ export const personalData: PersonalData = {
   experience: [
     {
       id: "1",
-      company: "科技公司A",
-      position: "前端工程师",
+      type: "work",
+      title: "前端工程师",
+      subtitle: "科技公司A",
       startDate: "2022-06",
       endDate: "至今",
       description: "负责公司核心产品的前端开发，使用 React 和 TypeScript 构建用户界面，优化页面性能和用户体验。",
@@ -110,8 +130,9 @@ export const personalData: PersonalData = {
     },
     {
       id: "2",
-      company: "科技公司B",
-      position: "前端开发实习生",
+      type: "work",
+      title: "前端开发实习生",
+      subtitle: "科技公司B",
       startDate: "2021-03",
       endDate: "2022-05",
       description: "参与公司官网和内部管理系统的开发，使用 Vue.js 和 Element UI 构建响应式页面。",

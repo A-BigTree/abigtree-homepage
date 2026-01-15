@@ -14,6 +14,7 @@ export interface Project {
   technologies: Technology[];
   links: ProjectLink[];
   status: ProjectStatus;
+  category?: ProjectCategory;
   featured?: boolean;
   startDate?: string;
   endDate?: string;
@@ -33,8 +34,10 @@ export interface ProjectLink {
 
 export type ProjectStatus = 'completed' | 'in-progress' | 'planned' | 'archived';
 
+export type ProjectCategory = 'recent' | 'history';
+
 export interface ContactLink {
-  type: 'email' | 'github' | 'linkedin' | 'twitter' | 'website' | 'wechat';
+  type: 'email' | 'github' | 'linkedin' | 'twitter' | 'website' | 'wechat' | 'blog' | 'csdn';
   url: string;
   label: string;
   icon: string;
@@ -57,12 +60,16 @@ export interface Skill {
   years?: number;
 }
 
+export type ExperienceType = 'education' | 'work';
+
 export interface Experience {
   id: string;
-  company: string;
-  position: string;
+  type: ExperienceType;
+  title: string;
+  subtitle: string;
   startDate: string;
   endDate?: string;
   description: string;
-  technologies: string[];
+  technologies?: string[];
+  achievements?: string[];
 }

@@ -1,11 +1,10 @@
 import Layout from './components/Layout/Layout';
 import ProfileHeader from './components/ProfileHeader/ProfileHeader';
 import ProjectSection from './components/ProjectSection/ProjectSection';
-import ContactSection from './components/ContactSection/ContactSection';
+import ExperienceSection from './components/Experience/Experience';
 import Loading from './components/Loading/Loading';
 import Error from './components/Error/Error';
 import { useDataLoader } from './hooks/useDataLoader';
-import './App.css';
 
 function App() {
   const { data, loading, error, refetch } = useDataLoader();
@@ -40,18 +39,9 @@ function App() {
 
   return (
     <Layout>
-      <main className="main-content">
-        <ProfileHeader profile={data.profile} />
-        <ProjectSection 
-          projects={data.projects}
-          title="最近项目"
-          showStatus={true}
-        />
-        <ContactSection 
-          contacts={data.contacts}
-          layout="grid"
-        />
-      </main>
+      <ProfileHeader profile={data.profile} contacts={data.contacts} skills={data.skills} />
+      <ProjectSection projects={data.projects} />
+      <ExperienceSection experience={data.experience} />
     </Layout>
   );
 }

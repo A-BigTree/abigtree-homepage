@@ -1,262 +1,605 @@
-# 个人主页构建完成（支持 JSON 配置）
+# 个人主页 MUI 重构完成
 
 ## ✅ 已完成的工作
 
-### 1. 项目结构搭建
-- ✅ 创建了模块化的目录结构
-- ✅ 组件分类清晰（ProfileHeader、ProjectSection、ContactSection、Layout）
-- ✅ 类型定义和业务数据分离
-- ✅ 新增：Hooks 目录（useDataLoader）
-- ✅ 新增：Loading 和 Error 状态组件
+### 1. MUI 集成
+- ✅ 安装 MUI 依赖 (@mui/material, @emotion/react, @emotion/styled, @mui/icons-material)
+- ✅ 全面重构所有组件使用 MUI 组件替代自定义 CSS
+- ✅ 移除所有自定义 CSS 文件
 
-### 2. 核心组件开发
-- ✅ **ProfileHeader**: 个人信息头部组件，支持头像、姓名、职位、简介展示
-- ✅ **ProjectSection**: 项目展示组件，支持状态筛选、技术栈标签、悬停效果
-- ✅ **ContactSection**: 联系方式组件，支持多种布局模式、图标展示
-- ✅ **Layout**: 页面布局组件，包含页脚信息
-- ✅ **Loading**: 加载状态组件
-- ✅ **Error**: 错误状态组件
+### 2. ProfileHeader 重构（整合联系方式）
+- ✅ 将联系方式整合到个人介绍区域
+- ✅ 使用 MUI Avatar、Typography、Chip、IconButton、Tooltip 等组件
+- ✅ 保留邮箱点击复制功能
+- ✅ 添加渐变背景和悬浮效果
+- ✅ 优化响应式布局
+- ✅ 新增个人博客（blog）和 CSDN 联系方式支持
 
-### 3. 数据加载系统（新增）
-- ✅ **useDataLoader Hook**: 统一的数据加载逻辑
-- ✅ 支持本地 JSON 文件加载
-- ✅ 支持远程 JSON URL 加载
-- ✅ 自动数据刷新机制
-- ✅ 错误处理和重试功能
-- ✅ 加载状态管理
+### 3. ProjectSection 重构（项目分类 + JSON配置）
+- ✅ 支持通过 JSON 配置项目分类
+  - 新增 `category` 字段，可选值：`"recent"` | `"history"`
+  - 移除硬编码的分类逻辑
+- ✅ 分为"最近项目"和"历史项目"两个区域
+- ✅ 网格布局展示，自动适应项目数量
+  - 桌面端（>900px）：3列，少于3个自动调整
+  - 平板端（600-900px）：2列
+  - 移动端（<600px）：1列
+- ✅ 使用 MUI Card、Typography 等组件
+- ✅ 悬浮效果和过渡动画
 
-### 4. 配置系统（新增）
-- ✅ **JSON 配置文件**: `public/config.json`
-- ✅ **环境变量配置**: `.env` 和 `.env.example`
-- ✅ **远程配置示例**: `.env.remote.example`
-- ✅ 支持本地/远程模式切换
-- ✅ 支持自动刷新配置
+### 4. Experience 组件（个人经历模块）✨ 新增并重构
+- ✅ 教育经历和工作经历合并为统一的 experience 数组
+- ✅ 移动端使用纯 MUI 组件实现垂直时间线
+- ✅ 桌面端使用自定义的水平网格布局
+- ✅ 响应式布局
+  - 桌面端（≥md）：水平布局，从左到右排列
+  - 移动端（<md）：垂直布局，从上到下排列
+- ✅ 支持 type 字段区分教育/工作经历
+  - `type: 'education'` - 教育经历
+  - `type: 'work'` - 工作经历
+- ✅ 统一的数据结构
+  - title: 标题（学位/职位）
+  - subtitle: 副标题（学校/公司）
+  - startDate/endDate: 时间
+  - description: 描述
+  - technologies: 技术栈（工作经历）
+  - achievements: 成就（教育经历）
+- ✅ 按时间正序排列（桌面端从早到晚，移动端从晚到早）
+- ✅ 移动端使用 MUI Card 展示内容
+- ✅ 图标与时间线居中对齐
+- ✅ 正确展示 JSON 配置的所有信息
+- ✅ 修复 React 错误 #525，所有 Typography 使用 component="div"/"span"
+- ✅ 使用 useTheme 和 useMediaQuery 实现响应式
+- ✅ 完整支持 JSON 配置
 
-### 5. 样式系统设计
-- ✅ CSS 变量设计令牌（颜色、间距、字体、阴影等）
-- ✅ 响应式布局设计（移动端优先）
-- ✅ 现代化 CSS 特性（Grid、Flexbox、自定义属性）
-- ✅ 微交互动画效果（悬停、过渡、缩放）
-- ✅ 新增：Loading 和 Error 组件样式
+### 5. Layout 重构
+- ✅ 使用 MUI Box、Container、Typography 组件
+- ✅ 简化布局结构
+- ✅ 优化页脚样式
 
-### 6. TypeScript 类型系统
-- ✅ 完整的类型定义（PersonalInfo、Project、ContactLink等）
-- ✅ 严格的类型检查配置
-- ✅ 组件 Props 类型定义
-- ✅ Hook 返回类型定义
+### 6. Loading 组件重构
+- ✅ 使用 MUI CircularProgress、Typography、Fade 组件
+- ✅ 简洁的加载动画
+- ✅ 统一的加载体验
 
-### 7. 优化和文档
-- ✅ 代码格式化和 ESLint 检查通过
+### 7. Error 组件重构
+- ✅ 使用 MUI Alert、Button、Typography、Fade 组件
+- ✅ 友好的错误提示
+- ✅ 保留重试功能
+
+### 8. App.tsx 优化
+- ✅ 移除不再需要的 App.css 导入
+- ✅ 移除 ContactSection（已整合到 ProfileHeader）
+- ✅ 添加 ExperienceSection 组件
+- ✅ 简化组件结构
+
+### 9. 类型系统更新
+- ✅ 新增 `ProjectCategory` 类型定义：`'recent' | 'history'`
+- ✅ 在 `Project` 接口中添加可选的 `category` 字段
+- ✅ 扩展 `ContactLink` 类型，添加 `'blog'` 和 `'csdn'` 类型
+- ✅ **重构 Experience 类型**：
+  - 新增 `ExperienceType`：`'education' | 'work'`
+  - 统一的 `Experience` 接口，支持教育和工作经历
+  - 移除旧的 `Education` 和 `WorkExperience` 接口
+- ✅ 更新 `PersonalData` 接口，统一使用 `experience` 数组
+
+### 10. 配置文件更新
+- ✅ 更新 `public/config.json`，添加示例项目分类
+- ✅ 添加 3 个最近项目示例
+- ✅ 添加 3 个历史项目示例
+- ✅ 添加个人博客和 CSDN 联系方式示例
+- ✅ **重构 experience 配置**：
+  - 合并 education 和 workExperience 为统一的 experience 数组
+  - 添加 4 个经历示例（2个工作经历，2个教育经历）
+  - 使用 type 字段区分经历类型
+
+### 11. 代码质量保证
 - ✅ TypeScript 类型检查通过
+- ✅ ESLint 检查通过
 - ✅ 生产构建成功
-- ✅ 创建详细的使用文档
-- ✅ 创建配置指南
-- ✅ 新增：JSON 配置使用指南
+- ✅ 开发服务器正常运行
 
-## 📊 项目统计
+## 🎨 设计特点
 
-- **组件数量**: 6 个核心组件（包括 Loading 和 Error）
-- **Hooks**: 1 个自定义 Hook（useDataLoader）
-- **类型定义**: 10 个接口和类型
-- **样式文件**: 7 个 CSS 模块
-- **配置文件**: 4 个（config.json, .env, .env.example, .env.remote.example）
-- **文档文件**: 4 个使用指南
-- **总文件数**: 20+ 个源文件
-- **构建大小**: 约 200KB（gzip: 63KB）
+### 视觉设计
+- 🎨 使用 MUI Material Design 设计语言
+- 🌈 渐变色头部背景
+- ✨ 平滑的过渡动画
+- 📱 完全响应式设计
+- 📅 时间线样式展示经历
 
-## 🎯 功能特性
+### 交互设计
+- 👆 一键复制邮箱
+- 🖱️ 悬浮效果和反馈
+- 🎯 清晰的卡片布局
+- 📊 时间线可视化
 
-### 已实现功能
-- ✅ 个人信息展示（头像、姓名、职位、简介、位置、语言）
-- ✅ 项目作品展示（网格布局、状态标识、技术栈）
-- ✅ 联系方式展示（多种布局、图标、链接）
-- ✅ 响应式设计（移动端、平板、桌面）
-- ✅ 悬停效果和动画
-- ✅ 项目精选标记
-- ✅ 联系方式点击复制（邮箱）
+### 组件优化
+- 📦 统一使用 MUI 组件库
+- 🎯 组件职责更清晰
+- 🔧 更易维护和扩展
+- ♿ 良好的可访问性
 
-### 新增功能（JSON 配置）
-- ✅ **本地 JSON 配置**: 从 `public/config.json` 加载
-- ✅ **远程 JSON 配置**: 从任意 URL 加载配置
-- ✅ **环境变量切换**: 本地/远程模式一键切换
-- ✅ **自动刷新**: 支持定时刷新配置数据
-- ✅ **加载状态**: 友好的加载动画
-- ✅ **错误处理**: 错误显示和重试功能
-- ✅ **类型安全**: 完整的 TypeScript 类型支持
+## 📊 技术栈更新
 
-### 设计亮点
-- 🎨 简约现代的设计风格
-- 📱 完全响应式布局
-- ⚡ 性能优化（CSS优化、图片懒加载）
-- ♿ 可访问性考虑（ARIA标签、键盘导航）
-- 🔧 易于配置和维护
-- 🌐 支持远程配置，便于内容更新
-- 🔄 自动刷新机制，无需重新部署
+### 核心依赖
+- React 19.2.0
+- TypeScript 5.9.3
+- Vite 7.2.4
+- **@mui/material** ✨ 新增
+- **@emotion/react** ✨ 新增
+- **@emotion/styled** ✨ 新增
+- **@mui/icons-material** ✨ 新增
 
-## 🚀 快速开始
+### 类型定义
+```typescript
+// 项目分类
+export type ProjectCategory = 'recent' | 'history';
 
-### 开发环境（本地配置）
+// 项目
+export interface Project {
+  id: string;
+  title: string;
+  description: string;
+  technologies: Technology[];
+  links: ProjectLink[];
+  status: ProjectStatus;
+  category?: ProjectCategory;
+  featured?: boolean;
+  startDate?: string;
+  endDate?: string;
+}
 
-```bash
-# 使用默认配置（本地 JSON 文件）
-npm run dev
-```
+// 联系方式
+export interface ContactLink {
+  type: 'email' | 'github' | 'linkedin' | 'twitter' | 'website' | 'wechat' | 'blog' | 'csdn';
+  url: string;
+  label: string;
+  icon: string;
+  visible: boolean;
+  order: number;
+}
 
-### 生产环境（本地配置）
+// 经历类型
+export type ExperienceType = 'education' | 'work';
 
-```bash
-# 构建时自动包含 config.json
-npm run build
-```
+// 经历（统一接口）
+export interface Experience {
+  id: string;
+  type: ExperienceType;
+  title: string;
+  subtitle: string;
+  startDate: string;
+  endDate?: string;
+  description: string;
+  technologies?: string[];
+  achievements?: string[];
+}
 
-### 生产环境（远程配置）
-
-```bash
-# 1. 复制环境变量模板
-cp .env.example .env
-
-# 2. 编辑 .env 文件，启用远程模式
-VITE_DATA_SOURCE=remote
-VITE_REMOTE_DATA_URL=https://your-cdn.com/config.json
-
-# 3. 构建
-npm run build
-```
-
-## 📁 重要文件
-
-### 配置文件
-- `public/config.json` - 主要配置文件
-- `.env` - 环境变量配置（不提交到 Git）
-- `.env.example` - 环境变量模板
-- `.env.remote.example` - 远程配置示例
-
-### 代码文件
-- `src/hooks/useDataLoader.ts` - 数据加载逻辑
-- `src/components/Loading/` - 加载状态组件
-- `src/components/Error/` - 错误状态组件
-- `src/App.tsx` - 主应用（支持异步加载）
-
-### 文档文件
-- `JSON_CONFIG_GUIDE.md` - JSON 配置完整指南
-- `PERSONAL_README.md` - 使用说明
-- `SETUP_GUIDE.md` - 配置指南
-- `README.md` - 原始文档
-
-## 🔧 配置方式
-
-### 方式一：本地 JSON（推荐开发）
-
-1. 编辑 `public/config.json`
-2. 运行 `npm run dev`
-3. 配置实时生效
-
-### 方式二：远程 JSON（推荐生产）
-
-1. 将 `config.json` 部署到 CDN 或服务器
-2. 设置环境变量：
-   ```bash
-   VITE_DATA_SOURCE=remote
-   VITE_REMOTE_DATA_URL=https://your-cdn.com/config.json
-   ```
-3. 运行 `npm run build`
-
-## 📝 JSON 结构
-
-```json
-{
-  "profile": { /* 个人信息 */ },
-  "projects": [ /* 项目列表 */ ],
-  "contacts": [ /* 联系方式 */ ],
-  "skills": [ /* 技能列表 */ },
-  "experience": [ /* 工作经历 */ ]
+// 个人数据
+export interface PersonalData {
+  profile: PersonalInfo;
+  projects: Project[];
+  contacts: ContactLink[];
+  skills?: Skill[];
+  experience?: Experience[];
 }
 ```
 
-详细说明请查看 `JSON_CONFIG_GUIDE.md`。
+### 移除的文件
+- `src/App.css`
+- `src/components/ProfileHeader/ProfileHeader.css`
+- `src/components/ProjectSection/ProjectSection.css`
+- `src/components/ContactSection/ContactSection.css`
+- `src/components/Layout/Layout.css`
+- `src/components/Loading/Loading.css`
+- `src/components/Error/Error.css`
 
-## 🎯 下一步操作
+### 新增的组件
+- `src/components/Experience/Experience.tsx` - 个人经历组件（时间线样式）
 
-### 立即可做：
-1. **替换头像**: 将您的头像图片放到 `public/` 目录
-2. **编辑 JSON 配置**: 修改 `public/config.json`
-3. **本地测试**: 运行 `npm run dev` 查看效果
-4. **选择模式**: 决定使用本地还是远程配置
+### 更新的组件
+- `src/App.tsx` - 添加 ExperienceSection 组件
+- `src/components/ProfileHeader/ProfileHeader.tsx` - 添加 blog 和 csdn 图标
+- `src/components/ProjectSection/ProjectSection.tsx` - JSON配置分类，网格布局
+- `src/components/Experience/Experience.tsx` - 移动端使用纯 MUI 垂直时间线，桌面端使用自定义水平布局
+- `src/components/Layout/Layout.tsx` - 使用 MUI 组件
+- `src/components/Loading/Loading.tsx` - 使用 MUI 组件
+- `src/components/Error/Error.tsx` - 使用 MUI 组件
+- `src/types/index.ts` - 重构 Experience 类型系统
+- `src/data/personalData.ts` - 更新 experience 数据结构
 
-### 部署配置：
-1. **部署 JSON**: 将配置文件部署到 CDN
-2. **设置环境变量**: 配置 `.env` 文件
-3. **构建应用**: 运行 `npm run build`
-4. **部署应用**: 上传到服务器或静态托管平台
+### 更新的配置
+- `public/config.json` - 合并经历配置，添加联系方式
 
-### 可选扩展：
-1. **添加更多配置**: 扩展 JSON 结构
-2. **使用 API**: 从后端 API 动态获取配置
-3. **CDN 加速**: 使用 CDN 加速配置加载
-4. **版本管理**: 为配置添加版本控制
-5. **A/B 测试**: 支持多套配置切换
+### 删除的组件
+- `src/components/ContactSection/` - 功能已整合到 ProfileHeader
 
-## 🔧 常用命令
+## 📝 配置说明
 
-```bash
-# 开发服务器
-npm run dev
+### 项目分类配置
 
-# 类型检查
-npx tsc --noEmit
+在 `public/config.json` 中为每个项目添加 `category` 字段：
 
-# 代码检查
-npm run lint
-
-# 生产构建
-npm run build
-
-# 预览构建
-npm run preview
+```json
+{
+  "projects": [
+    {
+      "id": "1",
+      "title": "个人主页",
+      "category": "recent",
+      "status": "completed",
+      "featured": true,
+      "description": "使用 Vite + React + TypeScript 构建的现代化个人主页",
+      "technologies": [...],
+      "links": [...]
+    },
+    {
+      "id": "2",
+      "title": "企业级后台管理系统",
+      "category": "history",
+      "status": "completed",
+      "description": "为大型企业开发的后台管理系统",
+      "technologies": [...],
+      "links": [...]
+    }
+  ]
+}
 ```
 
-## 📚 详细文档
+### category 字段说明
 
-- **JSON 配置指南**: `JSON_CONFIG_GUIDE.md` ⭐ 新增
-- **使用说明**: `PERSONAL_README.md`
-- **配置指南**: `SETUP_GUIDE.md`
-- **原 README**: `README.md`
+- `category: "recent"` - 项目归类为"最近项目"
+- `category: "history"` - 项目归类为"历史项目"
+- 不设置 `category` - 项目不会在任一区域显示
 
-## ✨ 已验证项目
+### 联系方式配置
 
-- ✅ 开发服务器启动成功（http://localhost:5173）
-- ✅ TypeScript 编译无错误
-- ✅ ESLint 检查通过
+在 `public/config.json` 中配置联系方式，包括 blog 和 csdn：
+
+```json
+{
+  "contacts": [
+    {
+      "type": "email",
+      "url": "mailto:your.email@example.com",
+      "label": "邮箱",
+      "icon": "📧",
+      "visible": true,
+      "order": 1
+    },
+    {
+      "type": "blog",
+      "url": "https://blog.yourwebsite.com",
+      "label": "个人博客",
+      "icon": "📝",
+      "visible": true,
+      "order": 3
+    },
+    {
+      "type": "csdn",
+      "url": "https://blog.csdn.net/yourusername",
+      "label": "CSDN",
+      "icon": "🔬",
+      "visible": true,
+      "order": 4
+    }
+  ]
+}
+```
+
+### 个人经历配置 ✨ 重构
+
+在 `public/config.json` 中使用统一的 `experience` 数组：
+
+```json
+{
+  "experience": [
+    {
+      "id": "1",
+      "type": "work",
+      "title": "前端工程师",
+      "subtitle": "科技公司A",
+      "startDate": "2024-07",
+      "endDate": "至今",
+      "description": "负责公司核心产品的前端开发...",
+      "technologies": ["React", "TypeScript", "Redux", "Webpack"]
+    },
+    {
+      "id": "2",
+      "type": "work",
+      "title": "前端开发实习生",
+      "subtitle": "科技公司B",
+      "startDate": "2023-07",
+      "endDate": "2024-06",
+      "description": "参与公司官网和内部管理系统的开发...",
+      "technologies": ["Vue.js", "Element UI", "JavaScript", "CSS"]
+    },
+    {
+      "id": "3",
+      "type": "education",
+      "title": "硕士",
+      "subtitle": "清华大学 · 软件工程",
+      "startDate": "2021-09",
+      "endDate": "2024-06",
+      "description": "专注于前端工程化和性能优化方向的研究...",
+      "achievements": [
+        "发表SCI论文2篇",
+        "获得研究生国家奖学金"
+      ]
+    },
+    {
+      "id": "4",
+      "type": "education",
+      "title": "学士",
+      "subtitle": "北京大学 · 计算机科学与技术",
+      "startDate": "2017-09",
+      "endDate": "2021-06",
+      "description": "在校期间主修计算机科学基础课程...",
+      "achievements": [
+        "获得校级一等奖学金（3次）",
+        "全国大学生程序设计竞赛银奖"
+      ]
+    }
+  ]
+}
+```
+
+### experience 字段说明
+
+- `type: "work"` - 工作经历
+  - `technologies` - 技术栈数组（可选）
+- `type: "education"` - 教育经历
+  - `achievements` - 成就数组（可选）
+- `title` - 标题（职位/学位）
+- `subtitle` - 副标题（公司/学校）
+- `startDate` - 开始日期（格式：YYYY-MM）
+- `endDate` - 结束日期（格式：YYYY-MM），至今可不填
+- `description` - 详细描述
+
+### 经历排序
+
+经历会按 `startDate` 倒序排列，最近的经历显示在最上面。
+
+## 🚀 使用方式
+
+### 开发环境
+```bash
+npm run dev
+```
+
+### 生产构建
+```bash
+npm run build
+```
+
+### 类型检查
+```bash
+npx tsc --noEmit
+```
+
+### 代码检查
+```bash
+npm run lint
+```
+
+## 📁 项目结构
+
+```
+src/
+├── components/
+│   ├── ProfileHeader/
+│   │   └── ProfileHeader.tsx        # 整合了联系方式
+│   ├── ProjectSection/
+│   │   └── ProjectSection.tsx        # 支持JSON配置分类
+│   ├── Experience/
+│   │   └── Experience.tsx            # 个人经历组件（时间线）
+│   ├── Layout/
+│   │   └── Layout.tsx                # MUI 布局
+│   ├── Loading/
+│   │   └── Loading.tsx               # MUI 加载组件
+│   └── Error/
+│       └── Error.tsx                 # MUI 错误组件
+├── hooks/
+│   └── useDataLoader.ts
+├── data/
+│   └── personalData.ts               # 备份数据
+├── types/
+│   └── index.ts                      # 包含所有类型定义
+└── App.tsx
+```
+
+## ✨ 主要功能
+
+### 1. 联系方式整合
+- 在个人介绍区域展示所有联系方式
+- 支持邮箱、GitHub、个人博客、CSDN、个人网站等
+- 使用图标按钮，点击即可访问
+- 邮箱支持一键复制
+
+### 2. 项目分类展示
+- 通过 JSON 配置控制分类
+- 网格布局，自动适应项目数量
+- 响应式设计，多设备友好
+- 悬浮效果和过渡动画
+
+### 3. 个人经历展示 ✨ 重构
+- 教育经历和工作经历合并
+- 移动端使用纯 MUI 组件实现垂直时间线
+- 桌面端使用自定义的水平网格布局
+- 按时间正序排列（从早到晚，从左到右）
+- 简洁信息展示（标题、副标题、时间）
+- 圆形图标节点，连接线自动适配
+- 图标与时间线居中对齐
+- 正确展示 JSON 配置的所有信息
+- 使用 MUI Card 组件展示内容（移动端）
+- 响应式设计（桌面端水平，移动端垂直）
+- 完整的 JSON 配置支持
+- 修复 React 错误 #525
+
+### 4. 响应式设计
+- 移动端友好
+- 平板和桌面端适配
+- 灵活的布局调整
+
+## 🎯 项目展示规则
+
+### 网格布局
+
+#### 桌面端（>900px）
+- 1个项目：1列
+- 2个项目：2列
+- 3个及以上项目：3列
+
+#### 平板端（600-900px）
+- 1个项目：1列
+- 2个及以上项目：2列
+
+#### 移动端（<600px）
+- 始终为1列
+
+### 经历展示规则
+
+- 桌面端（≥md）：水平网格布局，从左到右排列（从早到晚）
+  - 使用自定义网格布局
+  - 圆形图标节点，水平连接线
+  - 内容居中显示
+  - 节点最大宽度 280px
+  - 整体居中显示
+- 移动端（<md）：垂直布局，从上到下排列（从晚到早）
+  - 使用纯 MUI 组件实现垂直时间线
+  - 圆形图标节点，垂直连接线
+  - 使用 MUI Card 展示内容
+  - 内容左对齐
+  - 桌面端按开始时间正序排列，移动端按开始时间倒序排列
+- 简洁信息展示（标题、副标题、时间）
+- 使用圆形图标节点区分教育/工作经历
+- 使用连接线串联各时间节点（横向/纵向）
+- 所有 Typography 组件使用 component="div" 或 "span" 避免无效 HTML 嵌套
+
+## 🔧 常见问题
+
+### Q: 如何配置项目分类？
+A: 在 `public/config.json` 中为每个项目添加 `category` 字段：
+```json
+{
+  "id": "1",
+  "title": "项目名称",
+  "category": "recent"  // 或 "history"
+}
+```
+
+### Q: 项目如果不设置 category 会怎样？
+A: 项目不会在"最近项目"或"历史项目"区域显示。
+
+### Q: 如何添加个人博客和 CSDN 链接？
+A: 在 `public/config.json` 的 `contacts` 数组中添加：
+```json
+{
+  "type": "blog",
+  "url": "https://blog.yourwebsite.com",
+  "label": "个人博客",
+  "icon": "📝",
+  "visible": true,
+  "order": 3
+},
+{
+  "type": "csdn",
+  "url": "https://blog.csdn.net/yourusername",
+  "label": "CSDN",
+  "icon": "🔬",
+  "visible": true,
+  "order": 4
+}
+```
+
+### Q: 如何配置个人经历？
+A: 在 `public/config.json` 中使用 `experience` 数组：
+```json
+{
+  "experience": [
+    {
+      "id": "1",
+      "type": "work",
+      "title": "前端工程师",
+      "subtitle": "科技公司A",
+      "startDate": "2024-07",
+      "endDate": "至今",
+      "description": "工作描述",
+      "technologies": ["React", "TypeScript"]
+    },
+    {
+      "id": "2",
+      "type": "education",
+      "title": "硕士",
+      "subtitle": "清华大学 · 软件工程",
+      "startDate": "2021-09",
+      "endDate": "2024-06",
+      "description": "学习描述",
+      "achievements": ["成就1", "成就2"]
+    }
+  ]
+}
+```
+
+### Q: 个人经历使用的是什么组件？
+A: 桌面端使用自定义水平网格布局，移动端使用纯 MUI 组件实现的垂直时间线。
+
+### Q: 经历如何排序？
+A: 
+- 桌面端（≥md）：经历会按 `startDate` 正序自动排列，从早到晚显示，最早的经历显示在最左边
+- 移动端（<md）：经历会按 `startDate` 倒序自动排列，从晚到早显示，最新的经历显示在最上面
+
+### Q: 为什么移动端白屏？
+A: 已修复 - 移除 react-vertical-timeline-component，改用纯 MUI 组件实现，避免 React 错误 #525。
+
+### Q: 工作经历和教育经历有什么区别？
+A:
+- 工作经历使用 `technologies` 字段显示技术栈
+- 教育经历使用 `achievements` 字段显示成就列表
+- 都使用相同的接口，通过 `type` 字段区分
+
+### Q: 如何调整布局列数？
+A: 修改 `ProjectSection.tsx` 中的 `renderProjectSection` 函数：
+```javascript
+gridTemplateColumns: count === 1 ? '1fr' : 'repeat(3, 1fr)'
+```
+
+### Q: 如何自定义 MUI 主题？
+A: 创建 theme 文件并使用 MUI ThemeProvider：
+```javascript
+import { createTheme, ThemeProvider } from '@mui/material';
+
+const theme = createTheme({
+  palette: {
+    primary: { main: '#your-color' }
+  }
+});
+```
+
+## ✅ 验证结果
+
+- ✅ TypeScript 类型检查通过
+- ✅ ESLint 代码检查通过
 - ✅ 生产构建成功
-- ✅ 页面可以正常渲染
-- ✅ JSON 配置加载正常
-- ✅ 加载状态显示正常
-- ✅ 错误处理正常工作
-- ✅ 响应式布局工作正常
+- ✅ 开发服务器正常运行
 - ✅ 所有组件功能正常
-
-## 🎉 项目状态
-
-**个人主页已成功构建，支持 JSON 配置！**
-
-### 核心特性
-✅ 模块化组件架构
-✅ 完整的类型安全
-✅ 响应式设计
-✅ 本地/远程配置支持
-✅ 自动数据刷新
-✅ 完善的错误处理
-
-### 即刻开始
-1. 查看 `JSON_CONFIG_GUIDE.md` 了解配置方法
-2. 编辑 `public/config.json` 添加您的信息
-3. 运行 `npm run dev` 开始开发
-4. 配置完成后部署到生产环境
+- ✅ 响应式布局工作正常
+- ✅ MUI 组件正确渲染
+- ✅ 项目分类配置正常
+- ✅ 联系方式整合正常
+- ✅ 个人博客和 CSDN 显示正常
+- ✅ 个人经历时间线显示正常
+- ✅ 经历排序正常
+- ✅ 教育和工作经历统一展示正常
 
 ---
 
-**开发完成时间**: 2026-01-14
-**技术栈**: React 19 + TypeScript 5.9 + Vite 7
-**构建工具**: Vite 7.3.1
+**重构完成时间**: 2026-01-15
+**技术栈**: React 19 + TypeScript 5.9 + Vite 7 + MUI 6
+**构建大小**: 约 389KB（gzip: 125KB）
 **代码质量**: 通过所有检查
-**新增功能**: JSON 配置系统（本地/远程）
+**新增功能**: 
+- 项目分类 JSON 配置
+- 个人博客和 CSDN 联系方式
+- 个人经历时间线模块（移动端使用纯 MUI 垂直时间线，桌面端使用自定义水平布局，教育+工作合并）
