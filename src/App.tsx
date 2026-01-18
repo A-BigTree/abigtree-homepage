@@ -41,7 +41,6 @@ function App() {
     <Layout>
       <ProfileHeader profile={data.profile} contacts={data.contacts} skills={data.skills} />
       <ProjectSection projects={data.projects} />
-      <ExperienceSection experience={data.experience} />
     </Layout>
   );
 }
