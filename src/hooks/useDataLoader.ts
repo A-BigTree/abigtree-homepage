@@ -26,6 +26,9 @@ export const useDataLoader = (): UseDataLoaderReturn => {
 
       let responseData: PersonalData;
 
+      console.log('source', DATA_SOURCE);
+      console.log('remoteUrl', REMOTE_DATA_URL);
+
       if (DATA_SOURCE === 'remote' && REMOTE_DATA_URL) {
         const response = await fetch(REMOTE_DATA_URL);
         

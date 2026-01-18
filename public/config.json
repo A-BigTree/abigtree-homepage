@@ -1,120 +1,23 @@
 {
   "profile": {
     "name": "一颗大树🌳",
-    "avatar": "https://r2.common.config.abigtree.top/test/IMG_0005.JPG",
-    "bio": "专注前端开发，热爱创造优雅的用户体验。擅长 React、TypeScript 和现代化前端技术栈。",
-    "title": "前端开发者",
-    "location": "中国"
+    "avatar": "https://r2.common.config.abigtree.top/common/headImg.JPG",
+    "bio": "目前致力于后端开发，目标是成为全栈开发工程师，坚持学习，热爱分享👋",
+    "title": "全栈开发工程师",
+    "location": "中国·杭州"
   },
-  "projects": [
-    {
-      "id": "1",
-      "title": "个人主页",
-      "description": "使用 Vite + React + TypeScript 构建的现代化个人主页，展示个人作品和技能。",
-      "category": "recent",
-      "technologies": [
-        { "name": "React", "category": "frontend", "proficiency": 5 },
-        { "name": "TypeScript", "category": "language", "proficiency": 4 },
-        { "name": "Vite", "category": "tool", "proficiency": 4 },
-        { "name": "CSS3", "category": "frontend", "proficiency": 4 }
-      ],
-      "links": [
-        { "type": "github", "url": "https://github.com/yourusername/portfolio", "label": "GitHub" },
-        { "type": "demo", "url": "https://yourwebsite.com", "label": "预览" }
-      ],
-      "status": "completed",
-      "featured": true
-    },
-    {
-      "id": "2",
-      "title": "React 组件库",
-      "description": "一套可复用的 React UI 组件库，提供常见的基础组件和交互组件。",
-      "category": "recent",
-      "technologies": [
-        { "name": "React", "category": "frontend", "proficiency": 5 },
-        { "name": "TypeScript", "category": "language", "proficiency": 4 },
-        { "name": "Storybook", "category": "tool", "proficiency": 3 },
-        { "name": "CSS Modules", "category": "frontend", "proficiency": 4 }
-      ],
-      "links": [
-        { "type": "github", "url": "https://github.com/yourusername/ui-components", "label": "GitHub" },
-        { "type": "docs", "url": "https://yourwebsite.com/docs", "label": "文档" },
-        { "type": "npm", "url": "https://npmjs.com/package/your-components", "label": "NPM" }
-      ],
-      "status": "in-progress"
-    },
-    {
-      "id": "3",
-      "title": "数据可视化平台",
-      "description": "基于 Web 的数据可视化分析平台，支持多种图表类型和实时数据更新。",
-      "category": "recent",
-      "technologies": [
-        { "name": "React", "category": "frontend", "proficiency": 5 },
-        { "name": "D3.js", "category": "frontend", "proficiency": 3 },
-        { "name": "Node.js", "category": "backend", "proficiency": 3 },
-        { "name": "WebSocket", "category": "tool", "proficiency": 3 }
-      ],
-      "links": [
-        { "type": "github", "url": "https://github.com/yourusername/data-viz", "label": "GitHub" },
-        { "type": "demo", "url": "https://data-viz.yourwebsite.com", "label": "预览" }
-      ],
-      "status": "completed"
-    },
-    {
-      "id": "4",
-      "title": "企业级后台管理系统",
-      "description": "为大型企业开发的后台管理系统，包含权限管理、数据统计、报表导出等功能。",
-      "category": "history",
-      "technologies": [
-        { "name": "Vue.js", "category": "frontend", "proficiency": 5 },
-        { "name": "Element UI", "category": "frontend", "proficiency": 4 },
-        { "name": "Express", "category": "backend", "proficiency": 4 },
-        { "name": "MySQL", "category": "backend", "proficiency": 3 }
-      ],
-      "links": [
-        { "type": "github", "url": "https://github.com/yourusername/admin-system", "label": "GitHub" },
-        { "type": "demo", "url": "https://admin-demo.yourwebsite.com", "label": "预览" }
-      ],
-      "status": "completed"
-    },
-    {
-      "id": "5",
-      "title": "电商小程序",
-      "description": "基于微信小程序的电商应用，支持商品浏览、购物车、订单管理等功能。",
-      "category": "history",
-      "technologies": [
-        { "name": "微信小程序", "category": "frontend", "proficiency": 4 },
-        { "name": "JavaScript", "category": "language", "proficiency": 5 },
-        { "name": "Node.js", "category": "backend", "proficiency": 4 },
-        { "name": "MongoDB", "category": "backend", "proficiency": 3 }
-      ],
-      "links": [
-        { "type": "github", "url": "https://github.com/yourusername/miniprogram", "label": "GitHub" }
-      ],
-      "status": "completed"
-    },
-    {
-      "id": "6",
-      "title": "在线教育平台",
-      "description": "在线学习平台，提供视频课程、在线测试、学习进度跟踪等功能。",
-      "category": "history",
-      "technologies": [
-        { "name": "React", "category": "frontend", "proficiency": 5 },
-        { "name": "Redux", "category": "tool", "proficiency": 4 },
-        { "name": "Spring Boot", "category": "backend", "proficiency": 3 },
-        { "name": "Redis", "category": "backend", "proficiency": 3 }
-      ],
-      "links": [
-        { "type": "github", "url": "https://github.com/yourusername/education-platform", "label": "GitHub" },
-        { "type": "demo", "url": "https://edu.yourwebsite.com", "label": "预览" }
-      ],
-      "status": "completed"
-    }
+  "skills": [
+    { "name": "Java", "category": "语言", "level": 5, "years": 4 },
+    { "name": "Rust", "category": "语言", "level": 4, "years": 2 },
+    { "name": "SpringBoot", "category": "后端框架", "level": 5, "years": 3 },
+    { "name": "React", "category": "前端框架", "level": 4, "years": 2 },
+    { "name": "Vue", "category": "前端框架", "level": 3, "years": 2 },
+    { "name": "AI", "category": "工具", "level": 4, "years": 4 }
   ],
   "contacts": [
     {
       "type": "email",
-      "url": "mailto:your.email@example.com",
+      "url": "mailto:shuxinwang662@gmail.com",
       "label": "邮箱",
       "icon": "📧",
       "visible": true,
@@ -122,23 +25,15 @@
     },
     {
       "type": "github",
-      "url": "https://github.com/yourusername",
+      "url": "https://github.com/A-BigTree",
       "label": "GitHub",
       "icon": "💻",
       "visible": true,
       "order": 2
     },
     {
-      "type": "blog",
-      "url": "https://blog.yourwebsite.com",
-      "label": "个人博客",
-      "icon": "📝",
-      "visible": true,
-      "order": 3
-    },
-    {
       "type": "csdn",
-      "url": "https://blog.csdn.net/yourusername",
+      "url": "https://blog.csdn.net/weixin_53580595",
       "label": "CSDN",
       "icon": "🔬",
       "visible": true,
@@ -146,58 +41,104 @@
     },
     {
       "type": "website",
-      "url": "https://yourwebsite.com",
+      "url": "https://www.abigtree.top/",
       "label": "个人网站",
       "icon": "🌐",
       "visible": true,
       "order": 5
     }
   ],
-  "skills": [
-    { "name": "JavaScript", "category": "语言", "level": 5, "years": 4 },
-    { "name": "TypeScript", "category": "语言", "level": 4, "years": 2 },
-    { "name": "React", "category": "前端框架", "level": 5, "years": 3 },
-    { "name": "Vue.js", "category": "前端框架", "level": 4, "years": 2 },
-    { "name": "Node.js", "category": "后端", "level": 3, "years": 2 },
-    { "name": "CSS/Sass", "category": "样式", "level": 4, "years": 4 },
-    { "name": "Git", "category": "工具", "level": 4, "years": 3 },
-    { "name": "Webpack/Vite", "category": "工具", "level": 3, "years": 2 }
-  ],
-  "experience": [
+  "projects": [
     {
       "id": "1",
-      "type": "education",
-      "title": "学士",
-      "subtitle": "北京大学 · 计算机科学与技术",
-      "startDate": "2017-09",
-      "endDate": "2021-06",
-      "description": "在校期间主修计算机科学基础课程，包括数据结构、算法、操作系统、计算机网络等核心课程。",
-      "achievements": [
-        "获得校级一等奖学金（3次）",
-        "全国大学生程序设计竞赛银奖",
-        "担任学院技术社团负责人",
-        "毕业设计获得优秀毕业论文"
-      ]
+      "title": "微服务电商系统",
+      "description": "软件课程实践，使用Vue+SpringBoot+Nacos前后端分离微电商服务系统，C端+B端+平台端三端管理系统",
+      "category": "recent",
+      "technologies": [
+        { "name": "Java", "category": "frontend", "proficiency": 5 },
+        { "name": "Vue", "category": "language", "proficiency": 4 },
+        { "name": "SpringBoot", "category": "tool", "proficiency": 4 },
+        { "name": "Nacos", "category": "tool", "proficiency": 4 }
+      ],
+      "links": [
+        { "type": "github", "url": "https://github.com/A-BigTree/seu-e-commerce", "label": "GitHub" }
+      ],
+      "status": "completed",
+      "featured": true
     },
     {
       "id": "2",
-      "type": "work",
-      "subtitle": "科技公司B",
-      "title": "前端开发实习生",
-      "startDate": "2023-07",
-      "endDate": "2024-06",
-      "description": "参与公司官网和内部管理系统的开发，使用 Vue.js 和 Element UI 构建响应式页面。负责组件库的维护和文档编写，提升团队开发效率。",
-      "technologies": ["Vue.js", "Element UI", "JavaScript", "CSS", "Git"]
+      "title": "学习笔记整理",
+      "description": "日程学习记录笔记整合整理，包括计算机基础、应用框架学习和知识图谱知识研究，持续更新中",
+      "category": "recent",
+      "technologies": [
+        { "name": "markdown", "category": "frontend", "proficiency": 5 }
+      ],
+      "links": [
+        { "type": "github", "url": "https://github.com/A-BigTree/tree-learning-notes", "label": "GitHub" }
+      ],
+      "status": "in-progress"
     },
     {
       "id": "3",
-      "type": "work",
-      "subtitle": "科技公司A",
-      "title": "前端工程师",
-      "startDate": "2024-07",
-      "endDate": "至今",
-      "description": "负责公司核心产品的前端开发，使用 React 和 TypeScript 构建用户界面，优化页面性能和用户体验。主导前端架构设计，推动技术栈升级，提升开发效率。",
-      "technologies": ["React", "TypeScript", "Redux", "Webpack", "Vite", "Jest"]
+      "title": "基于Java的miniCC编译器",
+      "description": "基于Java实现的miniCC编译流程，包括词法分析、语法分析、中间代码生成&优化的一整套流程",
+      "category": "recent",
+      "technologies": [
+        { "name": "Java", "category": "frontend", "proficiency": 5 },
+        { "name": "Bash", "category": "language", "proficiency": 4 },
+        { "name": "设计模式", "category": "tool", "proficiency": 3 }
+      ],
+      "links": [
+        { "type": "github", "url": "https://github.com/A-BigTree/minisys-minicc-java", "label": "GitHub" }
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "4",
+      "title": "酒店数据爬取",
+      "description": "学校课程数据需要，基于Python实现，多线程爬取Booking网站酒店数据和图片",
+      "category": "history",
+      "technologies": [
+        { "name": "Python", "category": "frontend", "proficiency": 5 },
+        { "name": "多线程", "category": "frontend", "proficiency": 4 },
+        { "name": "IP池", "category": "backend", "proficiency": 4 }
+      ],
+      "links": [
+        { "type": "github", "url": "https://github.com/A-BigTree/hotel_Crawling", "label": "GitHub" }
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "5",
+      "title": "酒店管理系统",
+      "description": "实践课程项目，基于Java+Maven+Spring+Thymeleaf框架实现，第一次构建框架项目并尝试部署",
+      "category": "history",
+      "technologies": [
+        { "name": "Java", "category": "frontend", "proficiency": 4 },
+        { "name": "Spring", "category": "language", "proficiency": 5 },
+        { "name": "Thymeleaf", "category": "backend", "proficiency": 4 }
+      ],
+      "links": [
+        { "type": "github", "url": "https://github.com/A-BigTree/seu_hotel_Booking", "label": "GitHub" }
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "6",
+      "title": "维基百科数据获取",
+      "description": "基于Python+多线程实现多套图谱系统获取，梳理维基百科数据结构，整合多套百科数据多线程获取能力",
+      "category": "history",
+      "technologies": [
+        { "name": "Python", "category": "frontend", "proficiency": 5 },
+        { "name": "多线程", "category": "tool", "proficiency": 4 },
+        { "name": "设计模式", "category": "backend", "proficiency": 3 },
+        { "name": "Wikipedia", "category": "backend", "proficiency": 3 }
+      ],
+      "links": [
+        { "type": "github", "url": "https://github.com/A-BigTree/searchmanage_Wiki", "label": "GitHub" }
+      ],
+      "status": "completed"
     }
   ]
 }

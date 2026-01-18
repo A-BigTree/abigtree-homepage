@@ -1,7 +1,6 @@
 import Layout from './components/Layout/Layout';
 import ProfileHeader from './components/ProfileHeader/ProfileHeader';
 import ProjectSection from './components/ProjectSection/ProjectSection';
-import ExperienceSection from './components/Experience/Experience';
 import Loading from './components/Loading/Loading';
 import Error from './components/Error/Error';
 import { useDataLoader } from './hooks/useDataLoader';
