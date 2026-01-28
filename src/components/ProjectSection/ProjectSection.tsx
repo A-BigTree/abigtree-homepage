@@ -1,30 +1,12 @@
 import React from 'react';
-import {
-  Box,
-  Typography,
-  Container,
-  Card,
-  CardContent,
-  CardActions,
-  Chip,
-  Button,
-  Stack
-} from '@mui/material';
-import {
-  Launch,
-  GitHub,
-  Description,
-  ShoppingCart
-} from '@mui/icons-material';
+import { Icon } from '@iconify/react';
 import type { Project, ProjectStatus } from '../../types';
 
 interface ProjectSectionProps {
   projects: Project[];
 }
 
-const ProjectSection: React.FC<ProjectSectionProps> = ({
-  projects
-}) => {
+const ProjectSection: React.FC<ProjectSectionProps> = ({ projects }) => {
   const recentProjects = projects.filter(p => p.category === 'recent');
   const historyProjects = projects.filter(p => p.category === 'history');
 
@@ -38,139 +20,125 @@ const ProjectSection: React.FC<ProjectSectionProps> = ({
     return labels[status];
   };
 
-  const getStatusColor = (status: ProjectStatus): 'success' | 'info' | 'warning' | 'default' => {
-    const colors: Record<ProjectStatus, 'success' | 'info' | 'warning' | 'default'> = {
-      'completed': 'success',
-      'in-progress': 'info',
-      'planned': 'warning',
-      'archived': 'default'
+  const getStatusColor = (status: ProjectStatus): string => {
+    const colors: Record<ProjectStatus, string> = {
+      'completed': 'bg-green-500 text-white',
+      'in-progress': 'bg-blue-500 text-white',
+      'planned': 'bg-yellow-400 text-black',
+      'archived': 'bg-gray-400 text-white'
     };
     return colors[status];
   };
 
-  const getLinkIcon = (type: string): React.ReactNode => {
-    const icons: Record<string, React.ReactNode> = {
-      demo: <Launch />,
-      github: <GitHub />,
-      docs: <Description />,
-      npm: <ShoppingCart />
+  const getLinkIcon = (type: string): string => {
+    const icons: Record<string, string> = {
+      demo: 'mdi:launch',
+      github: 'mdi:github',
+      docs: 'mdi:file-document',
+      npm: 'mdi:npm'
     };
-    return icons[type] || <Launch />;
+    return icons[type] || 'mdi:launch';
   };
 
-  const renderProjectCard = (project: Project) => (
-    <Card
-      key={project.id}
-      sx={{
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        transition: 'all 0.3s ease',
-        '&:hover': {
-          transform: 'translateY(-4px)',
-          boxShadow: 6
-        }
-      }}
-    >
-      <CardContent sx={{ flexGrow: 1 }}>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', mb: 2 }}>
-          <Typography variant="h6" component="h3" sx={{ fontWeight: 600 }}>
+  const renderProjectCard = (project: Project, index: number) => {
+    const isFeatured = project.featured || (index === 0);
+    
+    return (
+      <div 
+        key={project.id} 
+        className={`brutal-card p-4 md:p-6 flex flex-col h-full ${
+          isFeatured ? 'md:col-span-2' : ''
+        }`}
+      >
+        <div className="flex flex-col md:flex-row justify-between items-start gap-3 mb-4">
+          <h3 className={`brutal-title text-xl md:text-2xl text-text leading-tight ${
+            isFeatured ? 'md:text-3xl' : ''
+          }`}>
             {project.title}
-          </Typography>
-          <Chip
-            label={getStatusLabel(project.status)}
-            size="small"
-            color={getStatusColor(project.status)}
-            variant="outlined"
-          />
-        </Box>
+          </h3>
+          <span className={`px-3 py-1 text-xs font-bold border-3 border-border shadow-hard ${getStatusColor(project.status)} shrink-0`}>
+            {getStatusLabel(project.status)}
+          </span>
+        </div>
 
-        <Typography
-          variant="body2"
-          color="text.secondary"
-          sx={{ mb: 2, lineHeight: 1.6 }}
-        >
+        <p className={`text-text mb-4 flex-1 leading-relaxed ${
+          isFeatured ? 'text-sm md:text-base' : 'text-xs md:text-sm'
+        }`}>
           {project.description}
-        </Typography>
+        </p>
 
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, mt: 'auto' }}>
-          {project.technologies.map((tech, index) => (
-            <Chip
-              key={index}
-              label={tech.name}
-              size="small"
-              variant="outlined"
-              sx={{ fontSize: '0.75rem' }}
-            />
+        <div className="flex flex-wrap gap-2 mb-4">
+          {project.technologies.map((tech, idx) => (
+            <span
+              key={idx}
+              className="px-3 py-1 text-xs font-bold bg-surface border-3 border-border text-text hover:bg-primary hover:text-white transition-colors duration-200"
+            >
+              {tech.name}
+            </span>
           ))}
-        </Box>
-      </CardContent>
+        </div>
 
-      {project.links && project.links.length > 0 && (
-        <CardActions sx={{ pt: 0 }}>
-          <Stack direction="row" spacing={1}>
-            {project.links.map((link, index) => (
-              <Button
-                key={index}
-                size="small"
-                startIcon={getLinkIcon(link.type)}
+        {project.links && project.links.length > 0 && (
+          <div className="flex flex-wrap gap-2 pt-4 border-t-4 border-border">
+            {project.links.map((link, idx) => (
+              <a
+                key={idx}
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                variant="text"
+                className="inline-flex items-center gap-2 px-4 py-2 font-bold text-sm bg-cta text-white border-3 border-border shadow-hard hover:translate-x-1 hover:translate-y-1 hover:shadow-[2px_2px_0_#000] transition-all duration-200"
               >
+                <Icon icon={getLinkIcon(link.type)} className="w-4 h-4" />
                 {link.label}
-              </Button>
+              </a>
             ))}
-          </Stack>
-        </CardActions>
-      )}
-    </Card>
-  );
+          </div>
+        )}
+      </div>
+    );
+  };
 
   const renderProjectSection = (title: string, projectsList: Project[]) => {
     const count = projectsList.length;
     
     return (
-      <Box sx={{ mb: 8 }}>
-        <Typography variant="h4" component="h2" gutterBottom sx={{ fontWeight: 600, textAlign: 'center', mb: 4 }}>
+      <div className="mb-20">
+        <h2 className="brutal-title text-4xl md:text-5xl lg:text-6xl mb-8 px-4 md:px-8">
           {title}
-        </Typography>
-        <Box
-          sx={{
-            display: 'grid',
-            gridTemplateColumns: count === 1 ? '1fr' : count === 2 ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
-            gap: 3,
-            '@media (max-width: 900px)': {
-              gridTemplateColumns: count === 1 ? '1fr' : 'repeat(2, 1fr)'
-            },
-            '@media (max-width: 600px)': {
-              gridTemplateColumns: '1fr'
-            }
-          }}
-        >
-          {projectsList.map((project) => (
-            <Box key={project.id}>
-              {renderProjectCard(project)}
-            </Box>
+        </h2>
+        
+        <div className={`grid gap-6 px-4 md:px-8 ${
+          count === 1 
+            ? 'grid-cols-1 max-w-2xl' 
+            : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+        }`}>
+          {projectsList.map((project, index) => (
+            <div key={project.id}>
+              {renderProjectCard(project, index)}
+            </div>
           ))}
-        </Box>
-      </Box>
+        </div>
+      </div>
     );
   };
 
   return (
-    <Container maxWidth="lg" sx={{ py: 4 }}>
-      {recentProjects.length > 0 && renderProjectSection('最近项目', recentProjects)}
+    <section className="py-20 px-0 geometric-grid">
+      <div className="max-w-7xl mx-auto">
+        {recentProjects.length > 0 && renderProjectSection('最近项目', recentProjects)}
       
-      {historyProjects.length > 0 && renderProjectSection('历史项目', historyProjects)}
+        {historyProjects.length > 0 && renderProjectSection('历史项目', historyProjects)}
 
-      {recentProjects.length === 0 && historyProjects.length === 0 && (
-        <Typography variant="body1" color="text.secondary" textAlign="center" py={8}>
-          暂无项目
-        </Typography>
-      )}
-    </Container>
+        {recentProjects.length === 0 && historyProjects.length === 0 && (
+          <div className="text-center py-24">
+            <div className="brutal-card p-12 inline-block max-w-md">
+              <Icon icon="mdi:folder-open-outline" className="w-20 h-20 mx-auto mb-6" />
+              <p className="text-2xl font-bold text-text">暂无项目</p>
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
   );
 };
 

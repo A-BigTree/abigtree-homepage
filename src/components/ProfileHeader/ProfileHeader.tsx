@@ -1,26 +1,6 @@
 import React from 'react';
-import {
-  Box,
-  Typography,
-  Avatar,
-  Container,
-  Chip,
-  IconButton,
-  Tooltip,
-  Stack,
-  Link,
-  Fade
-} from '@mui/material';
-import {
-  Email,
-  GitHub,
-  Language,
-  LinkedIn,
-  Twitter,
-  Chat,
-  Article,
-  Web
-} from '@mui/icons-material';
+import { motion } from 'framer-motion';
+import { Icon } from '@iconify/react';
 import type { PersonalInfo, ContactLink, Skill } from '../../types';
 
 interface ProfileHeaderProps {
@@ -30,15 +10,15 @@ interface ProfileHeaderProps {
 }
 
 const getContactIcon = (type: ContactLink['type']) => {
-  const icons: Record<ContactLink['type'], React.ReactNode> = {
-    email: <Email />,
-    github: <GitHub />,
-    linkedin: <LinkedIn />,
-    twitter: <Twitter />,
-    website: <Language />,
-    wechat: <Chat />,
-    blog: <Article />,
-    csdn: <Web />
+  const icons: Record<ContactLink['type'], string> = {
+    email: 'mdi:email',
+    github: 'mdi:github',
+    linkedin: 'mdi:linkedin',
+    twitter: 'mdi:twitter',
+    website: 'mdi:web',
+    wechat: 'mdi:wechat',
+    blog: 'mdi:article',
+    csdn: 'mdi:web'
   };
   return icons[type];
 };
@@ -57,181 +37,123 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({ profile, contacts, skills
   };
 
   return (
-    <Box
-      sx={{
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        color: 'white',
-        py: 8,
-        mb: 4
-      }}
-    >
-      <Container maxWidth="md">
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            textAlign: 'center',
-            gap: 3
-          }}
-        >
-          <Fade in timeout={600}>
-            <Avatar
-              src={profile.avatar}
-              alt={profile.name}
-              sx={{
-                width: 120,
-                height: 120,
-                border: '4px solid rgba(255, 255, 255, 0.3)',
-                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)'
-              }}
-            />
-          </Fade>
+    <section className="relative min-h-[60vh] py-20 px-4 md:px-8 lg:px-12 diagonal-stripes">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col lg:flex-row items-stretch gap-8 lg:gap-0">
+          <motion.div
+            initial={{ x: -50, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.4 }}
+            className="lg:w-2/5 flex flex-col justify-center p-8 brutal-card"
+          >
+            <div className="relative mb-8">
+              <div className="border-4 border-border p-2 inline-block bg-white">
+                <img
+                  src={profile.avatar}
+                  alt={profile.name}
+                  className="w-full max-w-[300px] border-4 border-border"
+                />
+              </div>
+              <div className="absolute -top-4 -right-4 w-24 h-24 bg-primary border-4 border-border flex items-center justify-center">
+                <span className="text-white text-4xl font-bold">Hi!</span>
+              </div>
+            </div>
 
-          <Fade in timeout={800}>
-            <Box sx={{ width: '100%' }}>
-              <Typography
-                variant="h3"
-                component="h1"
-                gutterBottom
-                sx={{
-                  fontWeight: 700,
-                  textShadow: '0 2px 8px rgba(0, 0, 0, 0.2)'
-                }}
-              >
-                {profile.name}
-              </Typography>
-
-              {profile.title && (
-                <Typography
-                  variant="h5"
-                  gutterBottom
-                  sx={{
-                    opacity: 0.95,
-                    fontWeight: 400
-                  }}
-                >
+            {profile.title && (
+              <div className="mb-6">
+                <h2 className="text-2xl md:text-3xl font-bold text-primary">
                   {profile.title}
-                </Typography>
-              )}
+                </h2>
+              </div>
+            )}
 
-              {profile.location && (
-                <Typography
-                  variant="body1"
-                  sx={{
-                    opacity: 0.9,
-                    mb: 2
-                  }}
-                >
-                  📍 {profile.location}
-                </Typography>
-              )}
+            {profile.location && (
+              <div className="flex items-center gap-2 mb-6 text-text">
+                <Icon icon="mdi:map-marker" className="w-6 h-6" />
+                <span className="text-lg font-medium">{profile.location}</span>
+              </div>
+            )}
 
-              {profile.bio && (
-                <Typography
-                  variant="body1"
-                  sx={{
-                    opacity: 0.9,
-                    maxWidth: 600,
-                    mx: 'auto',
-                    lineHeight: 1.8,
-                    mb: 3
-                  }}
+            <div className="flex flex-wrap gap-3">
+              {visibleContacts.map((contact) => (
+                <a
+                  key={contact.type}
+                  href={contact.url}
+                  target={contact.type === 'email' ? '_self' : '_blank'}
+                  rel="noopener noreferrer"
+                  onClick={(e) => contact.type === 'email' ? handleEmailClick(e, contact.url) : undefined}
+                  className="group p-4 bg-surface border-3 border-border shadow-hard hover:translate-x-1 hover:translate-y-1 hover:shadow-[2px_2px_0_#000] transition-all duration-200"
+                  title={contact.label}
                 >
+                  <Icon
+                    icon={getContactIcon(contact.type)}
+                    className="w-6 h-6"
+                  />
+                </a>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ x: 50, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+            className="lg:w-3/5 flex flex-col justify-center p-8 lg:p-16"
+          >
+            <h1 className="brutal-title text-6xl md:text-7xl lg:text-8xl mb-8 text-text leading-none">
+              {profile.name}
+            </h1>
+
+            {profile.bio && (
+              <div className="mb-10 brutal-card p-8">
+                <h3 className="text-sm font-bold text-primary uppercase tracking-widest mb-4">
+                  关于我
+                </h3>
+                <p className="text-xl md:text-2xl leading-relaxed text-text">
                   {profile.bio}
-                </Typography>
-              )}
+                </p>
+              </div>
+            )}
 
-              {skills && skills.length > 0 && (
-                <Stack
-                  direction="row"
-                  spacing={1}
-                  justifyContent="center"
-                  sx={{ mb: 3, flexWrap: 'wrap' }}
-                >
+            {skills && skills.length > 0 && (
+              <div>
+                <h3 className="text-sm font-bold text-primary uppercase tracking-widest mb-6">
+                  技能栈
+                </h3>
+                <div className="flex flex-wrap gap-3">
                   {skills.map((skill, index) => (
-                    <Chip
+                    <span
                       key={index}
-                      label={skill.name}
-                      size="small"
-                      sx={{
-                        backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                        color: 'white',
-                        '&:hover': {
-                          backgroundColor: 'rgba(255, 255, 255, 0.3)'
-                        }
-                      }}
-                    />
-                  ))}
-                </Stack>
-              )}
-
-              {profile.languages && profile.languages.length > 0 && (
-                <Stack
-                  direction="row"
-                  spacing={1}
-                  justifyContent="center"
-                  sx={{ mb: 3, flexWrap: 'wrap' }}
-                >
-                  {profile.languages.map((language, index) => (
-                    <Chip
-                      key={index}
-                      label={language}
-                      size="small"
-                      sx={{
-                        backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                        color: 'white',
-                        '&:hover': {
-                          backgroundColor: 'rgba(255, 255, 255, 0.3)'
-                        }
-                      }}
-                    />
-                  ))}
-                </Stack>
-              )}
-
-              <Stack
-                direction="row"
-                spacing={2}
-                justifyContent="center"
-                sx={{ flexWrap: 'wrap' }}
-              >
-                {visibleContacts.map((contact) => (
-                  <Tooltip key={contact.type} title={contact.label}>
-                    <Link
-                      href={contact.url}
-                      target={contact.type === 'email' ? '_self' : '_blank'}
-                      rel="noopener noreferrer"
-                      onClick={(e) => contact.type === 'email' ? handleEmailClick(e, contact.url) : undefined}
-                      sx={{
-                        color: 'white',
-                        '&:hover': {
-                          color: 'rgba(255, 255, 255, 0.8)'
-                        }
-                      }}
+                      className="px-5 py-2 bg-primary text-white text-lg font-bold border-3 border-border shadow-hard hover:translate-x-1 hover:translate-y-1 hover:shadow-[2px_2px_0_#000] transition-all duration-200"
                     >
-                      <IconButton
-                        size="large"
-                        sx={{
-                          backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                          '&:hover': {
-                            backgroundColor: 'rgba(255, 255, 255, 0.3)',
-                            transform: 'scale(1.1)'
-                          },
-                          transition: 'all 0.3s ease'
-                        }}
-                      >
-                        {getContactIcon(contact.type)}
-                      </IconButton>
-                    </Link>
-                  </Tooltip>
-                ))}
-              </Stack>
-            </Box>
-          </Fade>
-        </Box>
-      </Container>
-    </Box>
+                      {skill.name}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {profile.languages && profile.languages.length > 0 && (
+              <div className="mt-8">
+                <h3 className="text-sm font-bold text-secondary uppercase tracking-widest mb-6">
+                  语言
+                </h3>
+                <div className="flex flex-wrap gap-3">
+                  {profile.languages.map((language, index) => (
+                    <span
+                      key={index}
+                      className="px-5 py-2 bg-cta text-white text-lg font-bold border-3 border-border shadow-hard hover:translate-x-1 hover:translate-y-1 hover:shadow-[2px_2px_0_#000] transition-all duration-200"
+                    >
+                      {language}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+          </motion.div>
+        </div>
+      </div>
+    </section>
   );
 };
 

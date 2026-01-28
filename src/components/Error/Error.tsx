@@ -1,6 +1,5 @@
-import { Box, Typography, Button, Alert, AlertTitle } from '@mui/material';
-import { Refresh } from '@mui/icons-material';
-import { Fade } from '@mui/material';
+import React from 'react';
+import { Icon } from '@iconify/react';
 
 interface ErrorProps {
   error: Error;
@@ -9,46 +8,32 @@ interface ErrorProps {
 
 const Error: React.FC<ErrorProps> = ({ error, onRetry }) => {
   return (
-    <Fade in timeout={300}>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          minHeight: '60vh',
-          px: 2
-        }}
-      >
-        <Alert
-          severity="error"
-          sx={{
-            maxWidth: 600,
-            width: '100%',
-            mb: 3
-          }}
-        >
-          <AlertTitle>加载失败</AlertTitle>
-          <Typography variant="body2">{error.message}</Typography>
-        </Alert>
+    <div className="flex flex-col items-center justify-center min-h-[60vh] px-4 gap-8">
+      <div className="brutal-card p-12 max-w-2xl w-full">
+        <div className="flex items-center gap-4 mb-8">
+          <div className="w-20 h-20 bg-primary border-4 border-border flex items-center justify-center">
+            <Icon icon="mdi:alert" className="w-12 h-12 text-white" />
+          </div>
+          <h3 className="brutal-title text-5xl text-primary">加载失败</h3>
+        </div>
+        
+        <div className="bg-surface border-4 border-border p-6 mb-8">
+          <p className="text-xl text-text">
+            {error.message}
+          </p>
+        </div>
         
         {onRetry && (
-          <Button
-            variant="contained"
-            startIcon={<Refresh />}
+          <button
             onClick={onRetry}
-            size="large"
-            sx={{
-              textTransform: 'none',
-              px: 4,
-              py: 1.5
-            }}
+            className="brutal-btn w-full text-xl"
           >
+            <Icon icon="mdi:refresh" className="w-6 h-6 mr-2" />
             重试
-          </Button>
+          </button>
         )}
-      </Box>
-    </Fade>
+      </div>
+    </div>
   );
 };
 

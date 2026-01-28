@@ -1,5 +1,4 @@
-import { Box, Typography, CircularProgress } from '@mui/material';
-import { Fade } from '@mui/material';
+import React from 'react';
 
 interface LoadingProps {
   message?: string;
@@ -7,23 +6,17 @@ interface LoadingProps {
 
 const Loading: React.FC<LoadingProps> = ({ message = '加载中...' }) => {
   return (
-    <Fade in timeout={300}>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          minHeight: '60vh',
-          gap: 3
-        }}
-      >
-        <CircularProgress size={60} thickness={4} />
-        <Typography variant="h6" color="text.secondary">
+    <div className="flex flex-col items-center justify-center min-h-[60vh] gap-8 px-4">
+      <div className="brutal-card p-12">
+        <div className="w-20 h-20 border-4 border-primary border-t-transparent animate-spin"></div>
+      </div>
+      
+      <div className="brutal-card p-8">
+        <p className="text-2xl font-bold text-text">
           {message}
-        </Typography>
-      </Box>
-    </Fade>
+        </p>
+      </div>
+    </div>
   );
 };
 

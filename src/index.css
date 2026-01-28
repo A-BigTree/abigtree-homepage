@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  
+  --color-primary: #E11D48;
+  --color-secondary: #FB7185;
+  --color-cta: #F97316;
+  --color-background: #FFF7ED;
+  --color-surface: #FFFFFF;
+  --color-text: #1C1917;
+  --color-border: #000000;
+  
+  --border-radius: 0px;
+  --shadow-hard: 4px 4px 0 #000;
+}
+
+@layer base {
+  * {
+    @apply antialiased;
+    border-color: theme('colors.border');
+  }
+
+  body {
+    @apply bg-background text-text font-sans;
+  }
+}
+
+@layer utilities {
+  .brutal-card {
+    @apply bg-surface border-3 border-border shadow-hard transition-all duration-200;
+    @apply hover:translate-x-1 hover:translate-y-1 hover:shadow-[2px_2px_0_#000];
+  }
+  
+  .brutal-btn {
+    @apply border-3 border-border bg-cta text-white px-6 py-3 font-bold shadow-hard;
+    @apply hover:translate-x-1 hover:translate-y-1 hover:shadow-[2px_2px_0_#000] hover:bg-orange-600;
+    @apply cursor-pointer;
+  }
+  
+  .brutal-title {
+    @apply font-display font-bold tracking-tight;
+  }
+  
+  .diagonal-stripes {
+    background-color: #FFF7ED;
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba(225, 29, 72, 0.03) 10px,
+      rgba(225, 29, 72, 0.03) 20px
+    );
+  }
+  
+  .geometric-grid {
+    background-color: #FFF7ED;
+    background-image: 
+      linear-gradient(rgba(225, 29, 72, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(225, 29, 72, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+}
